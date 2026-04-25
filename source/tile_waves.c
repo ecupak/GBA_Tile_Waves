@@ -578,7 +578,7 @@ int main()
 	build_wave_window_tilemap(&wbounds);
 
 	// Initialize helper data for wavefront generation.
-	u16 color_cycles[2] = {BANK_R, BANK_B};
+	u16 color_cycles[3] = {BANK_R, BANK_B, BANK_G};
 	u16 sound_cycles[7] = {NOTE_C, NOTE_E, NOTE_G, NOTE_D, NOTE_F, NOTE_A, NOTE_B};
 
 	u16 delta_volume = 1;
@@ -694,10 +694,10 @@ int main()
 				u16 adjustment = rand() % 3; // 0, 1, 2
 				fast_offset = (8 * adjustment) - 8;
 				
-				// The faster it will come back, the faster the radius delta will be.
-				// This avoids more than 2 waves on the field at once. We don't like that yet.
-				u16 radius_delta = 12 - (adjustment * 4);
+				// Faster radius growth to avoid 2 waves on the field at once. We don't like that yet.
+				u16 radius_delta = 12;
 				
+				// Only show green and blue colors.
 				u16 palette_bank = color_cycles[fast_cycle];
 				fast_cycle ^= 1;
 				
